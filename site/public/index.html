@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>My Favourite Library</title>
+        <link rel="stylesheet" href="css/screen.css">
+        <link rel="stylesheet" href="css/jquery-ui-1.10.4.custom.css">
+        <h1>My Favourite Books Collections</h1>
+
+        <div class="fb-share-button" data-href="http://localhost:8180/index.html" data-type="button_count"></div>
+        <p></p>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-related="jasoncosta" data-lang="en">Tweet</a>
+        <script>
+            !function(d,s,id) {
+                 var js,fjs=d.getElementsByTagName(s)[0];
+                 if(!d.getElementById(id)) {
+                     js=d.createElement(s);
+                     js.id=id;
+                     js.src="https://platform.twitter.com/widgets.js";
+                     fjs.parentNode.insertBefore(js,fjs);
+                 }}
+            (document,"script","twitter-wjs");
+        </script>
+        <p> </p>
+    </head>
+
+         <script id="bookTemplate" type="text/template">
+            <img src="<%= coverImage %>"/>
+            <ul>
+            <li><%= title %></li>
+             <li><%= author %></li>
+             <li><%= $.format.date( new Date( releaseDate ), 'MMMM yyyy' ) %></li>
+             <li><% _.each( keywords, function( keyobj ) {%> <%= keyobj.keyword %><% } ); %></li>
+             <li><%= links %></li>
+            </ul>
+            <button class="delete">Delete</button>
+        </script>
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/underscore.js"></script>
+        <script src="js/lib/backbone.js"></script>
+        <script src="js/lib/jquery-dateFormat.js"></script>
+        <script src="js/lib/jquery-ui-1.10.4.custom.js"></script>
+        <script src="js/app.js"></script>
+    <body>
+        <div id="fb-root"></div>
+            <script>
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); 
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en/all.js#xfbml=1&appId=267808760063209";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+
+        <div id="books">
+         <form id="addBook" action="#">
+            <div>
+                <label for="coverImage">CoverImage: </label><input id="coverImage" type="file" />
+                <label for="title">Title: </label><input id="title" type="text" />
+                <label for="author">Author: </label><input id="author" type="text" />
+                <label for="releaseDate" >Release_date: </label><input id="releaseDate" type="text" placeholder="YYYY.MM"/>
+                <label for="keywords">Keywords: </label><input id="keywords" type="text" />
+                <label for="links">Links: </label><input id="links" type="text" placeholder="Type in the book's link..."/>
+                <button id="add">Add</button>
+            </div>
+         </form>
+        </div>
+         
+    </body>
+</html>
