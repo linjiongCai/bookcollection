@@ -4,12 +4,14 @@ var app =  {
 
 app.Book = Backbone.Model.extend({
     defaults: {
+        
         coverImage: 'img/placeholder.png',
         title: 'No title',
         author: 'Unknown',
         releaseDate: 'Unknown',
         keywords: 'None',
         links: 'None'
+        
     },
 
     parse: function( response ) {
@@ -24,10 +26,17 @@ app.BookView = Backbone.View.extend({
      events: {
         'click .delete': 'deleteBook'
     },
+    
+    initialize: function() {
+        
+        
+        this.template= _.template( $( '#book-Template' ).html() );
+        
 
-    template: _.template( $( '#bookTemplate' ).html() ),
-
-    render: function() {
+    },
+   
+    
+     render: function() {
         this.$el.html( this.template( this.model.toJSON() ) );
         return this;
     },
@@ -49,7 +58,7 @@ app.LibraryView = Backbone.View.extend({
     el: '#books',
     events:{
     'click #add':'addBook'
-	},
+    },
 
     initialize: function() {
     this.collection = new app.Library();
