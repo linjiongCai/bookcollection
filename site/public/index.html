@@ -22,7 +22,9 @@
         
         <script src="js/lib/jquery.js"></script>
         <script src="js/lib/underscore.js"></script>
+
         <script src="js/lib/backbone.js"></script>
+        <script type="text/javascript" src="js/lib/backbone.localStorage.js"></script>
         <script src="js/lib/jquery-dateFormat.js"></script>
         <script src="js/lib/jquery-ui-1.10.4.custom.js"></script>
         <script src="js/app.js"></script>
@@ -72,7 +74,7 @@
         </div>
 
 
-        <form id="addBook" action="/api/books">
+        <form id="addBook" action="#">
                 <div id="addBook">
                 <input id="coverImage" type="hidden" />
                 <label for="title">Title: </label><input id="title" type="text" />

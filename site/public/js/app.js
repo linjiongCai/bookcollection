@@ -52,7 +52,8 @@ app.BookView = Backbone.View.extend({
 
 app.Library = Backbone.Collection.extend({
     model: app.Book,
-    url: '/api/books'
+    localStorage: new Store("app.Library"),
+    //url: '/api/books'
 });
 
 app.LibraryView = Backbone.View.extend({
