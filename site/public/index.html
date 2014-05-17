@@ -26,65 +26,13 @@
         <script src="js/lib/jquery-dateFormat.js"></script>
         <script src="js/lib/jquery-ui-1.10.4.custom.js"></script>
         <script src="js/app.js"></script>
-<script type="text/javascript">
-Parse.initialize("Q5fqlrREfwC2tXwfC83mNpOvyvSEIwQYiodjGnqk", "czzNrCFWawfmKcXgnE1d9r2YSTyEUWGwbSnmNXGX");
-
-</script>
 <body>
- <script type="text/javascript">
- function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-            //initialize settings
-            window.fbAsyncInit = function() {
-              FB.init({
-                appId: 267808760063209,
-                cookie: true,
-                xfbml: true,
-                version: 'v2.0'
-              });
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-              });
+      
 
-            };
-            (function(){
-              var e=document.createElement('script');
-              e.async=true;
-              e.src=document.location.protocol+'//connect.facebook.net/en_US/all.js';
-              document.getElementById('fb-root').appendChild(e);
-            }());  
-            function doFBLogin() {  
-                FB.login(function(response) {  
-                    if (response.authResponse) {  
-                        var token = response.authResponse.accessToken;  
-                        //define the login function on your client through FB  
-                    } else {  
-                        //processing an error  
-                    }  
-            }, {scope:'email,status_update,publish_stream'});  
-            //scope – the set of fields we received from the server when login  
-            }  
-            </script>
-
-<div data-role="page" id="index">
+<div data-role="page" id="booklist">
   <div data-role="header" data-position="fixed" data-fullscreen="true">
     <h1>My Favourite Books</h1>
-    <a href="#LoginDialog" data-role="button" class="ui-btn-right" data-icon="login" onClick="doFBLogin();">Login</a>
+    <!--a href="#searchBook" data-role="button" class="ui-btn-right" data-icon="search">Search</a-->
     
     <div data-role="controlgroup" data-type="horizontal">
     <a class="ui-label-right"><div class="fb-share-button"  data-href="http://ec2-54-72-165-147.eu-west-1.compute.amazonaws.com/" data-type="button_count"></div></a>
@@ -92,7 +40,7 @@ Parse.initialize("Q5fqlrREfwC2tXwfC83mNpOvyvSEIwQYiodjGnqk", "czzNrCFWawfmKcXgnE
   </div>
 </div>
 
-  <div data-role="main" class="ui-content" id="index"><br><br><br><br><br>
+  <div data-role="main" class="ui-content" id="booklist"><br><br><br><br><br>
     
         <div id="fb-root"></div>
             <script>
@@ -105,28 +53,58 @@ Parse.initialize("Q5fqlrREfwC2tXwfC83mNpOvyvSEIwQYiodjGnqk", "czzNrCFWawfmKcXgnE
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             </script>
-
+ <div data-role="main" class="ui-content">
+         <div id="books">
         
+        <div id="Adder">
+        <form id="uploadForm"
+          enctype="multipart/form-data"
+          action="/api/photos"
+          method="post">
+          <div>
+          <label for="userPhotoInput">Image: </label>
+          <input type="file" id="userPhotoInput" name="userPhoto" />
+          </div>
+        </form>
+        <span id="status"></span>
 
-        <div id="books">
-            <form id="addBook" action="#">
-                <div>
-                <label for="coverImage">CoverImage: </label><input id="coverImage" type="file" />
+        <div id="uploadedImage"> 
+        </div>
+
+
+        <form id="addBook" action="/api/books">
+                <div id="addBook">
+                <input id="coverImage" type="hidden" />
                 <label for="title">Title: </label><input id="title" type="text" />
                 <label for="author">Author: </label><input id="author" type="text" />
                 <label for="releaseDate" >Release_date: </label><input id="releaseDate" type="text" placeholder="YYYY.MM"/>
                 <label for="keywords">Keywords: </label><input id="keywords" type="text" />
                 <label for="links">Links: </label><input id="links" type="text" placeholder="Type in the book's link..."/>
-                <button id="add" class="ui-btn" data-icon="add" href="#booklist">Add</button>
+                <a id="add" class="ui-btn" data-icon="add">Add</a> 
               </div>      
         </form>
+ </div>
 
 </div>
 </div>
 </div>
-<div data-role="page" id="booklist">
-  <div data-role="main" class="ui-content">
-      <script id="book-Template" type="text/template">
+
+<!--div data-role="page" id="searchBook">
+  <div data-role="header" data-position="fixed" data-fullscreen="true">
+    <h1>My Favourite Books</h1>
+    <a href="#booklist" data-role="button" class="ui-btn-left" data-icon="back">back</a>
+</div>
+<div data-role="main" class="ui-content">
+ 
+   <div>Search: 
+   <input type="text" id="searchItem" />
+</div>
+
+</div>
+</div-->
+</body>
+
+<script id="book-Template" type="text/template">
             <img src="<%= coverImage %>"/>
             <ul>
             <li><span class="title"><%= title %></span></li>
@@ -137,9 +115,6 @@ Parse.initialize("Q5fqlrREfwC2tXwfC83mNpOvyvSEIwQYiodjGnqk", "czzNrCFWawfmKcXgnE
             <button class="delete">Delete</button>
             </ul>
         </script>
-  </div>
-</div>
-</body>
 
 
 </html>

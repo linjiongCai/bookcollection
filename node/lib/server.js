@@ -2,13 +2,18 @@
 var application_root = __dirname,
     express = require( 'express' ), 
     path = require( 'path' ), 
+    main = require('./main'),
     mongoose = require( 'mongoose' );
-
 var app = express();
 
 app.configure( function() {
     
-    app.use( express.bodyParser() );
+    app.use(express.logger("dev"));
+
+    app.use( express.bodyParser( {
+        uploadDir: __dirname + '/img',
+        keepExtensions: true
+    }) );
 
     app.use( express.methodOverride() );
 
@@ -36,6 +41,7 @@ app.get( '/api/books', function( request, response ) {
 
 app.post( '/api/books', function( request, response ) {
     var book = new BookModel({
+        coverImagePath: request.body.coverImagePath,
         title: request.body.title,
         author: request.body.author,
         releaseDate: request.body.releaseDate,
@@ -97,10 +103,13 @@ app.delete( '/api/books/:id', function( request, response ) {
     });
 });
 
+app.post('/images', main.addImage); // endpoint to post new images
+app.get('/images', main.getImages); // endpoint to get list of images
 
 mongoose.connect( 'mongodb://localhost/assignment2' );
 
 var Book = new mongoose.Schema({
+    coverImagePath: String,
     title: String,
     author: String,
     releaseDate: Date,
