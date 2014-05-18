@@ -8,75 +8,86 @@
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
 </head>
-        <script>
-            !function(d,s,id) {
-                 var js,fjs=d.getElementsByTagName(s)[0];
-                 if(!d.getElementById(id)) {
-                     js=d.createElement(s);
-                     js.id=id;
-                     js.src="https://platform.twitter.com/widgets.js";
-                     fjs.parentNode.insertBefore(js,fjs);
-                 }}
-            (document,"script","twitter-wjs");
-        </script>
+
+  <script>
+    !function(d,s,id) {
+      var js,fjs=d.getElementsByTagName(s)[0];
+        if(!d.getElementById(id)) {
+          js=d.createElement(s);
+          js.id=id;
+          js.src="https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js,fjs);
+        }
+      }
+    (document,"script","twitter-wjs");
+  </script>
+
+  <script type="text/javascript">
+    window.___gcfg = {lang: 'en'};
+    (function() {
+      var po = document.createElement('script'); 
+      po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; 
+      s.parentNode.insertBefore(po, s);
+    })();
+  </script>
         
-        <script src="js/lib/jquery.js"></script>
-        <script src="js/lib/underscore.js"></script>
+  <script src="js/lib/jquery.js"></script>
+  <script src="js/lib/underscore.js"></script>
+  <script src="js/lib/backbone.js"></script>
+  <script type="text/javascript" src="js/lib/backbone.localStorage.js"></script>
+  <script src="js/lib/jquery-dateFormat.js"></script>
+  <script src="js/lib/jquery-ui-1.10.4.custom.js"></script>
+  <script src="js/app.js"></script>
 
-        <script src="js/lib/backbone.js"></script>
-        <!--script type="text/javascript" src="js/lib/backbone.localStorage.js"></script-->
-        <script src="js/lib/jquery-dateFormat.js"></script>
-        <script src="js/lib/jquery-ui-1.10.4.custom.js"></script>
-        <script src="js/app.js"></script>
-<body onload="init()">
-      
 
-<div data-role="page" id="booklist">
-  <div data-role="header" data-position="fixed" data-fullscreen="true">
-    <h1>My Favourite Books</h1>
-    <!--a href="#searchBook" data-role="button" class="ui-btn-right" data-icon="search">Search</a-->
-    
-    <div data-role="controlgroup" data-type="horizontal">
-    <a class="ui-label-right"><div class="fb-share-button"  data-href="http://ec2-54-72-165-147.eu-west-1.compute.amazonaws.com/" data-type="button_count"></div></a>
-    <a class="ui-label-right"><a href="https://twitter.com/share" class="twitter-share-button" data-related="jasoncosta" data-lang="en">Tweet</a> </a>
-  </div>
-</div>
+<body>
+  <div data-role="page" id="booklist">
+    <div data-role="panel" id="share">
+      <h3>Share Links</h3>
+      <div data-role="controlgroup" data-type="horizontal">
+        <div class="fb-share-button"  data-href="http://ec2-54-72-165-147.eu-west-1.compute.amazonaws.com/" data-type="button_count"></div>
+        <br><br>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-related="jasoncosta" data-lang="en">Tweet</a>      
+        <br><br>
+        <div class="g-plus" data-href="http://ec2-54-72-165-147.eu-west-1.compute.amazonaws.com/" data-action="share"></div>
+    </div>
+  
+  <a href="#booklist" data-rel="close" class="ui-btn ui-btn-inline ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left" >Close</a>
 
-  <div data-role="main" class="ui-content" id="booklist"><br><br><br><br><br>
-    
-        <div id="fb-root"></div>
-            <script>
-                (function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); 
-                    js.id = id;
-                    js.src = "//connect.facebook.net/en/all.js#xfbml=1&appId=267808760063209";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-            </script>
- <div data-role="main" class="ui-content">
-         <div id="books">
-        
-        <!--div id="Adder">
-        <form id="uploadForm"
+    <div id="fb-root"></div>
+      <script>
+          (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "//connect.facebook.net/en/all.js#xfbml=1&appId=267808760063209";
+              fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+      </script>
+    </div>
+
+    <div data-role="header" data-position="fixed" data-fullscreen="true">
+      <h1>My Favourite Books</h1>
+      <a href="#share" data-role="button" class="ui-btn-right ui-btn-inline ui-corner-all ui-shadow" data-position-fixed="true">Share</a>
+    </div>
+
+    <div data-role="main" class="ui-content" id="booklist"><br><br>
+      <div id="books">
+        <!--form id="uploadForm"
           enctype="multipart/form-data"
-          action="/api/photos"
+          action="/upload"
           method="post">
           <div>
           <label for="userPhotoInput">Image: </label>
-          <input type="file" id="userPhotoInput" name="userPhoto" />
+          <input type="file" id="userPhotoInput" name="file" />
           </div>
-        </form>
-        <span id="status"></span>
-
-        <div id="uploadedImage"> 
-        </div-->
-
-
+        </form-->
         <form id="addBook" action="#">
                 <div id="addBook">
-                <!--input id="coverImage" type="hidden" /-->
+                <input id="coverImage" type="hidden" />
                 <label for="title">Title: </label><input id="title" type="text" />
                 <label for="author">Author: </label><input id="author" type="text" />
                 <label for="releaseDate" >Release_date: </label><input id="releaseDate" type="text" placeholder="YYYY.MM"/>
@@ -85,71 +96,61 @@
                 <a id="add" class="ui-btn" data-icon="add">Add</a> 
               </div>      
         </form>
- </div>
 
-</div>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
 
-<div data-role="page" id="searchBook">
+
+<div data-role="page" id="shareBook">
   <div data-role="header" data-position="fixed" data-fullscreen="true">
     <h1>My Favourite Books</h1>
     <a href="#booklist" data-role="button" class="ui-btn-left" data-icon="back">back</a>
-</div>
-<div data-role="main" class="ui-content">
- <script>
-    function init(){
-      document.addEventListener("deviceready", startup);
-    }
+  </div>
 
-    function startup(){
-      document.getElementById("searchButton").addEventListener("click", handleSearch);
-    }
+  <div data-role="main" class="ui-content">
+     <!--script>
+        function init(){
+          document.addEventListener("deviceready", startup);
+        }
 
-    function handleSearch(e){
-        var search = document.getElementById("name").value;
-        //What parts of the contact we will search
-        var fields = ["title", "name"];
-        //Options for the search
-        var options = new ContactFindOptions();
-        options.filter = search;
-        options.multiple = true;
-        document.getElementById("results").innerHTML="Searching...";
-        navigator.contacts.find(fields, contactSuccess, contactError, options);
-    }    
+        function startup(){
+          document.getElementById("searchButton").addEventListener("click", handleSearch);
+        }
 
-    function contactError(e){
-    document.getElementById("results").innerHTML="";
-    navigator.notification.alert("Sorry, an error was thrown!");
-    }
+        function handleSearch(e){
+            var search = document.getElementById("name").value;
+            //What parts of the contact we will search
+            var fields = ["title", "name"];
+            //Options for the search
+            var options = new ContactFindOptions();
+            options.filter = search;
+            options.multiple = true;
+            document.getElementById("results").innerHTML="Searching...";
+            navigator.contacts.find(fields, contactSuccess, contactError, options);
+        }    
 
-    function contactSuccess(results){
-    //No max, so we will default to only 10
-    var s = "";
-    for (var i = 0; i < Math.min(10, results.length); i++) {
-    s += "<p>"+results[i].title+"</p>";
-    }
+        function contactError(e){
+        document.getElementById("results").innerHTML="";
+        navigator.notification.alert("Sorry, an error was thrown!");
+        }
 
-    document.getElementById("results").innerHTML=s;
-    }
+        function contactSuccess(results){
+        //No max, so we will default to only 10
+        var s = "";
+        for (var i = 0; i < Math.min(10, results.length); i++) {
+        s += "<p>"+results[i].title+"</p>";
+        }
 
-    </script>
-    
+        document.getElementById("results").innerHTML=s;
+        }
 
-
-    <h1>Contact Search</h1>
-
-  <form>
-      <input type="text" id="name"><br/>
-      <input type="button" id="searchButton" value="Search">
-      <div id="results"></div>
-  </form>
-
-</div>
+        </script-->
+  </div>
 </div>
 </body>
 
-<script id="book-Template" type="text/template">
+      <script id="book-Template" type="text/template">
             <img src="<%= coverImage %>"/>
             <ul>
             <li><span class="title"><%= title %></span></li>
@@ -159,7 +160,5 @@
             <li><span class="links"><a href="{{link}}"><%= links %></a></span></li>
             <button class="delete">Delete</button>
             </ul>
-        </script>
-
-
+      </script>
 </html>

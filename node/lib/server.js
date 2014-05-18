@@ -2,8 +2,8 @@
 var application_root = __dirname,
     express = require( 'express' ), 
     path = require( 'path' ), 
-    main = require('./main'),
-    mongoose = require( 'mongoose' );
+    mongoose = require( 'mongoose' ),
+    fs = require('fs');
 var app = express();
 
 app.configure( function() {
@@ -11,8 +11,7 @@ app.configure( function() {
     app.use(express.logger("dev"));
 
     app.use( express.bodyParser( {
-        uploadDir: __dirname + '/img',
-        keepExtensions: true
+        uploadDir: __dirname + './uploads'
     }) );
 
     app.use( express.methodOverride() );
@@ -104,8 +103,26 @@ app.delete( '/api/books/:id', function( request, response ) {
     });
 });
 
-app.post('/images', main.addImage); // endpoint to post new images
-app.get('/images', main.getImages); // endpoint to get list of images
+app.post('/file-upload', function(req, res) {
+    // get the temporary location of the file
+    var tmp_path = req.files.thumbnail.path;
+    // set where the file should actually exists - in this case it is in the "images" directory
+    var target_path = './public/images/' + req.files.thumbnail.name;
+    // move the file from the temporary location to the intended location
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) throw err;
+        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        fs.unlink(tmp_path, function() {
+            if (err) throw err;
+            res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
+        });
+    });
+};
+
+app.get('/image.png', function (req, res) {
+    res.sendfile(path.resolve('./uploads/image.png'));
+});
+
 
 mongoose.connect( 'mongodb://localhost/assignment2' );
 
