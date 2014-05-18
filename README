@@ -14,11 +14,13 @@ http://ec2-54-72-165-147.eu-west-1.compute.amazonaws.com/
 
 Running this app is based on server.js in lib folder. Here is API routers:
 
-GET  	/api/books			get all books stored in mongoDB
-GET  	/api/books/:id			get one book from mongoDB
-POST	/api/books			add a new book to mongoDB
-PUT  	/api/books/:id			update a book in mongoDB
-DELETE	/api/books/:id			remove a book from mongoDB
+Routes 					|	Functions
+----------------------- |  ---------------------------------
+GET  	/api/books		|	get all books stored in mongoDB
+GET  	/api/books/:id	|	get one book from mongoDB
+POST	/api/books		|	add a new book to mongoDB
+PUT  	/api/books/:id	|	update a book in mongoDB
+DELETE	/api/books/:id	|	remove a book from mongoDB
 
 What's more, this app is capsulated to mobile app via PhoneGap. Here is a link to download the mobile app:
 
