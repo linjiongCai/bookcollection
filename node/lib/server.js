@@ -3,10 +3,13 @@ var application_root = __dirname,
     express = require( 'express' ), 
     path = require( 'path' ), 
     mongoose = require( 'mongoose' ),
+    logfmt = require( 'logfmt' ),
     fs = require('fs');
 var app = express();
 
 app.configure( function() {
+    
+    app.use(logfmt.requestLogger());
     
     app.use(express.logger("dev"));
 
