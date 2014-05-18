@@ -14,9 +14,9 @@ http://ec2-54-72-165-147.eu-west-1.compute.amazonaws.com/
 
 Running this app is based on server.js in lib folder. Here is API routers:
 
-GET  	/api/books				get all books stored in mongoDB
+GET  	/api/books			get all books stored in mongoDB
 GET  	/api/books/:id			get one book from mongoDB
-POST	/api/books				add a new book to mongoDB
+POST	/api/books			add a new book to mongoDB
 PUT  	/api/books/:id			update a book in mongoDB
 DELETE	/api/books/:id			remove a book from mongoDB
 
@@ -27,4 +27,4 @@ https://build.phonegap.com/apps/898422/share
 Just scanning the two-dimension code is fine. It will be downloaded automatically.
 
 Use cases can be viewed here as well.
-![alt tag](https://github.com/linjiongCai/bookcollection/raw/master/bookCollection.png)
+![alt text][https://github.com/linjiongCai/bookcollection/raw/master/bookCollection.png]
