@@ -1,4 +1,4 @@
-My Book Library
+#My Book Library
 
 ## 1. Introduction
 
@@ -21,10 +21,10 @@ Running this app is based on server.js in lib folder. Here is API routers:
 
 Routes 			|	Functions
 ----------------------- |  ---------------------------------
-GET  	/api/books	|	get all books stored in mongoDB
-GET  	/api/books/:id	|	get one book from mongoDB
+GET	/api/books	|	get all books stored in mongoDB
+GET	/api/books/:id	|	get one book from mongoDB
 POST	/api/books	|	add a new book to mongoDB
-PUT  	/api/books/:id	|	update a book in mongoDB
+PUT	/api/books/:id	|	update a book in mongoDB
 DELETE	/api/books/:id	|	remove a book from mongoDB
 
 ## 4. PhoneGap

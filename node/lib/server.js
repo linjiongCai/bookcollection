@@ -117,7 +117,7 @@ app.post('/file-upload', function(req, res) {
             res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
         });
     });
-};
+});
 
 app.get('/image.png', function (req, res) {
     res.sendfile(path.resolve('./uploads/image.png'));
