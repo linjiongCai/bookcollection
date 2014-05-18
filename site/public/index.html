@@ -28,7 +28,7 @@
         <script src="js/lib/jquery-dateFormat.js"></script>
         <script src="js/lib/jquery-ui-1.10.4.custom.js"></script>
         <script src="js/app.js"></script>
-<body>
+<body onload="init()">
       
 
 <div data-role="page" id="booklist">
@@ -58,7 +58,7 @@
  <div data-role="main" class="ui-content">
          <div id="books">
         
-        <div id="Adder">
+        <!--div id="Adder">
         <form id="uploadForm"
           enctype="multipart/form-data"
           action="/api/photos"
@@ -71,12 +71,12 @@
         <span id="status"></span>
 
         <div id="uploadedImage"> 
-        </div>
+        </div-->
 
 
         <form id="addBook" action="#">
                 <div id="addBook">
-                <input id="coverImage" type="hidden" />
+                <!--input id="coverImage" type="hidden" /-->
                 <label for="title">Title: </label><input id="title" type="text" />
                 <label for="author">Author: </label><input id="author" type="text" />
                 <label for="releaseDate" >Release_date: </label><input id="releaseDate" type="text" placeholder="YYYY.MM"/>
@@ -91,19 +91,62 @@
 </div>
 </div>
 
-<!--div data-role="page" id="searchBook">
+<div data-role="page" id="searchBook">
   <div data-role="header" data-position="fixed" data-fullscreen="true">
     <h1>My Favourite Books</h1>
     <a href="#booklist" data-role="button" class="ui-btn-left" data-icon="back">back</a>
 </div>
 <div data-role="main" class="ui-content">
- 
-   <div>Search: 
-   <input type="text" id="searchItem" />
-</div>
+ <script>
+    function init(){
+      document.addEventListener("deviceready", startup);
+    }
+
+    function startup(){
+      document.getElementById("searchButton").addEventListener("click", handleSearch);
+    }
+
+    function handleSearch(e){
+        var search = document.getElementById("name").value;
+        //What parts of the contact we will search
+        var fields = ["title", "name"];
+        //Options for the search
+        var options = new ContactFindOptions();
+        options.filter = search;
+        options.multiple = true;
+        document.getElementById("results").innerHTML="Searching...";
+        navigator.contacts.find(fields, contactSuccess, contactError, options);
+    }    
+
+    function contactError(e){
+    document.getElementById("results").innerHTML="";
+    navigator.notification.alert("Sorry, an error was thrown!");
+    }
+
+    function contactSuccess(results){
+    //No max, so we will default to only 10
+    var s = "";
+    for (var i = 0; i < Math.min(10, results.length); i++) {
+    s += "<p>"+results[i].title+"</p>";
+    }
+
+    document.getElementById("results").innerHTML=s;
+    }
+
+    </script>
+    
+
+
+    <h1>Contact Search</h1>
+
+  <form>
+      <input type="text" id="name"><br/>
+      <input type="button" id="searchButton" value="Search">
+      <div id="results"></div>
+  </form>
 
 </div>
-</div-->
+</div>
 </body>
 
 <script id="book-Template" type="text/template">
@@ -113,7 +156,7 @@
             <li><span class="author"><%= author %></span></li>
             <li><span class="date"><%= $.format.date( new Date( releaseDate ), 'dd MMMM yyyy' ) %></span></li>
             <li><span class="keywords"><% _.each( keywords, function( keyobj ) {%><%= keyobj.keyword %><% } ); %></span></li>
-            <li><span class="links"><%= links %></span></li>
+            <li><span class="links"><a href="{{link}}"><%= links %></a></span></li>
             <button class="delete">Delete</button>
             </ul>
         </script>

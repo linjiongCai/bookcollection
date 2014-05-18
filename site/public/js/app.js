@@ -25,26 +25,49 @@ app.BookView = Backbone.View.extend({
     tagName: 'div',
     className: 'bookContainer',
      events: {
-        'click .delete': 'deleteBook'
+        'click .edit': 'edit',
+        'click .delete': 'deleteBook',
+        'blur .item': 'close',
+        'keypress .item': 'onEnterUpdate',
+        'keyup .search' : 'search', 
     },
     
     initialize: function() {
-        
-        
         this.template= _.template( $( '#book-Template' ).html() );
-        
-
     },
    
-    
-     render: function() {
-        this.$el.html( this.template( this.model.toJSON() ) );
-        return this;
-    },
-
-    deleteBook: function() {
+    deleteBook: function(ev) {
+        ev.preventDefault();
         this.model.destroy();
         this.remove();
+    },
+
+    edit: function(ev) {
+            ev.preventDefault();
+            this.$('.item').attr('contenteditable', true).focus();
+          },
+
+    close: function(ev) {
+            var item = this.$('.item').text();
+            this.model.set('item', item);
+            this.$('.item').removeAttr('contenteditable');
+          },
+
+    onEnterUpdate: function(ev) {
+            var self = this;
+            if (ev.keyCode == 13) {
+              this.close();
+              _.delay(function() { self.$('.item').blur()}, 100);
+            }
+          },
+
+    search: function() {
+        this.collection.reset(filteredModels);
+    },
+
+    render: function() {
+        this.$el.html( this.template( this.model.toJSON() ) );
+        return this;
     },
 
 });

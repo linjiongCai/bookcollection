@@ -41,7 +41,7 @@ app.get( '/api/books', function( request, response ) {
 
 app.post( '/api/books', function( request, response ) {
     var book = new BookModel({
-        coverImagePath: request.body.coverImagePath,
+        //coverImagePath: request.body.coverImagePath,
         title: request.body.title,
         author: request.body.author,
         releaseDate: request.body.releaseDate,
@@ -62,6 +62,7 @@ app.post( '/api/books', function( request, response ) {
 app.get( '/api/books/:id', function( request, response ) {
     return BookModel.findById( request.params.id, function( err, book ) {
         if( !err ) {
+            console.log(book);
             return response.send( book );
         } else {
             return console.log( err );
