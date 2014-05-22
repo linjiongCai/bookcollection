@@ -19,13 +19,14 @@ http://ec2-54-72-165-147.eu-west-1.compute.amazonaws.com/
 
 Running this app is based on server.js in lib folder. Here is API routers:
 
-Routes 			|	Functions
------------------------ |  ---------------------------------
-GET	/api/books	|	get all books stored in mongoDB
-GET	/api/books/:id	|	get one book from mongoDB
-POST	/api/books	|	add a new book to mongoDB
-PUT	/api/books/:id	|	update a book in mongoDB
-DELETE	/api/books/:id	|	remove a book from mongoDB
+Routes 			|	Functions							|  Methods
+----------------------- |  ----------------------------	| --------------
+GET /api 		|	test API Running 					|	app.get()
+GET	/api/books	|	get all books stored in mongoDB		|	app.get('/api/books')
+GET	/api/books/:id	|	get one book from mongoDB		|	app.get('/api/books/:id')
+POST	/api/books	|	add a new book to mongoDB		|	app.post('/api/books')
+PUT	/api/books/:id	|	update a book in mongoDB		|	app.put('/api/books/:id')
+DELETE	/api/books/:id	|	remove a book from mongoDB	|	app.delete('/api/books/:id')
 
 ## 4. PhoneGap
 
